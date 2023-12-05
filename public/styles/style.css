@@ -1,0 +1,77 @@
+body {
+  background-color: #ebe3d5;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.to-do-card {
+  width: 45%;
+  background-color: #f3eeea;
+  border-radius: 14px;
+  min-height: 400px;
+  padding: 20px;
+}
+.hr-1 {
+  height: 2px;
+  background-color: #776b5d;
+  width: 85%;
+  text-align: left;
+  margin-left: 0;
+}
+.hr-2 {
+  background-color: #776b5d;
+  width: 80%;
+  text-align: left;
+  margin-left: 0;
+}
+.list-name h2,
+.list-name h3 {
+  margin: 10px 0;
+}
+
+.date {
+  background-color: #776b5d;
+  position: relative;
+  z-index: +1;
+  right: 80px;
+  min-height: 300px;
+  width: 10%;
+  border-radius: 14px;
+  padding: 20px;
+  color: #f3eeea;
+  display: flex;
+  flex-direction: column;
+}
+li {
+  list-style: none;
+}
+li .checkmark{
+    padding:2px;
+    margin-right:3px;
+    background-color: #776b5d;
+}
+.d{
+  justify-content: flex-start;
+  font-size: 20px;
+}
+a{
+  color:#776b5d;
+}
+button{
+  background-color:#f3eeea;
+  color:#776b5d;
+  border-radius: 50%;
+  border: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  justify-content: end;
+  height: 50px;
+  width: 50px;
+}
+
+input:checked+label {
+  text-decoration: line-through;
+  text-decoration-color: #776b5d;
+}
