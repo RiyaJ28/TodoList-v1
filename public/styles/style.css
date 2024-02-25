@@ -75,3 +75,37 @@ input:checked+label {
   text-decoration: line-through;
   text-decoration-color: #776b5d;
 }
+
+
+@media  (max-width: 768px) {
+  body{
+    flex-direction: column;
+  }
+  .date {
+    background-color: #776b5d;
+    position: relative;
+    z-index: +1;
+    color: #f3eeea;
+    width: 30%;
+    min-height: 100px;
+    right:0px;
+  }
+}
+
+@media  (max-width: 500px) {
+  body{
+    flex-direction: column;
+  }
+  .date {
+    background-color: #776b5d;
+    position: relative;
+    z-index: +1;
+    color: #f3eeea;
+    width: 30%;
+    min-height: 100px;
+    right:0px;
+  }
+  .d{
+    font-size: 14px;
+  }
+}

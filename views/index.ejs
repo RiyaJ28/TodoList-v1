@@ -6,119 +6,187 @@
         <div class="to-do-card">
             <div class="list-name">
                 <h2 class="profile-name">To-Do List </h2>
-                <h3 class="profile-job-title"><%- listName %> <%#!-- Button trigger modal1 --%> <a type="button" class=""
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop-1"> <svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path
-                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                <path fill-rule="evenodd"
-                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                            </svg></a></h3>
+                <h3 class="profile-job-title">Today's List</h3>
             </div>
             <hr class="hr-1">
             <ul class="list">
 
                 <% ListItems.forEach((listItem)=> {
 
-                %>
+                    %>
 
-                <li>
-                    <input class=" checkmark" type="checkbox" value="" id="flexCheckChecked-1">
-                    <label class="form-check-label" for="flexCheckChecked-1"><%- listItem  %></label>
-                    <%#!-- Button trigger modal3 --%> 
-                </li>
-                <hr class="hr-2">
-                <% }) %>
+                    <li>
+                        <input class=" checkmark" type="checkbox" value="" id="flexCheckChecked-1">
+                        <label class="form-check-label" for="flexCheckChecked-1"><%-listItem.id %> <%- listItem.item
+                                    %></label>
+                        <%#!-- Button trigger modal3 --%>
+                            <a type="button" class="delete" data-bs-toggle="modal"
+                                data-bs-target="#delete-<%- listItem.id %>"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                </svg></a>
+                            <div class="modal fade" id="delete-<%- listItem.id %>" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Are You Sure ?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/deleteItem" method="post">
+                                                <input type="hidden" name="id" value="<%- listItem.id %>">
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            /<a type="button"  class="update" data-bs-toggle="modal"
+                                data-bs-target="#update-<%-listItem.id %>"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-pen-fill"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001" />
+                                </svg></a>
+
+                            <div class="modal fade" id="update-<%-listItem.id %>" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add List Item</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/updateItem" method="post">
+                                                <input type="hidden" name="id" value="<%- listItem.id %>">
+                                                <div class="mb-3">
+                                                    <label for="ListItem" class="form-label">Update Item</label>
+                                                    <input type="text" class="form-control"
+                                                        id="exampleFormControlInput1" name="item"
+                                                        value="<%- listItem.item %>">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </li>
+                    <hr class="hr-2">
+                    <% }) %>
             </ul>
         </div>
         <div class="date d-flex">
             <div class="d  p-2"><%- date %></div>
             <div class="task mt-auto p-2">
                 <div class=" d-flex justify-content-center">
-                    <%#!-- Button trigger modal2 --%> 
-                    <button type="button" class="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-2">+</button>
+                    <%#!-- Button trigger modal2 --%>
+                        <button type="button" class="" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop-2">+</button>
                 </div>
 
-            </div>
-        </div>
-
-
-
-
-        <%#<!-- Modal1 -->%>
-        <div class="modal fade" id="staticBackdrop-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit List Name</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/Listname" method="post">
-                            <div class="mb-3">
-                                <label for="ListName" class="form-label">List Name</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" name="NewListName"
-                                    placeholder="Today's List">
-                            </div>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
 
         <%#<!-- Modal2 -->%>
-        <div class="modal fade" id="staticBackdrop-2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add List Item</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/listItem" method="post">
-                            <div class="mb-3">
-                                <label for="ListItem" class="form-label">New List Item</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" name="NewListItem"
-                                    placeholder="List Item">
-                            </div>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <%#<!-- Modal3 -->%>
-        <div class="modal fade" id="staticBackdrop-3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Are You Sure ?</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/deleteItem" method="post">
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                <button type="submit" class="btn btn-primary">Yes</button>
-                            </div>
-                        </form>
+            <div class="modal fade" id="staticBackdrop-2" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add List Item</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/listItem" method="post">
+                                <div class="mb-3">
+                                    <label for="ListItem" class="form-label">New List Item</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        name="NewListItem" placeholder="List Item">
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-<%- include("partials/footer.ejs") %>
-<script>
 
-</script>
+            <%#<!-- Modal3 -->%>
+                <div class="modal fade" id="staticBackdrop-3" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Are You Sure ?</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/deleteItem" method="post">
+                                    <div class="mb-3">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%#<!-- Modal4 -->%>
+                    <div class="modal fade" id="staticBackdrop-4" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add List Item</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/updateItem" method="post">
+                                        <input type="hidden" name="initialName" value="">
+                                        <div class="mb-3">
+                                            <label for="ListItem" class="form-label">New List Item</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                name="NewListItem" placeholder="List Item">
+                                        </div>
+                                        <div class="mb-3">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%- include("partials/footer.ejs") %>
+                        <script>
+                            $("#").click(function () {
+                                var text = $("#textarea").val();
+                                $("#modal_body").html(text);
+                            });
+                        </script>
